@@ -2,10 +2,12 @@ import { Character } from './character';
 
 export class Selector {
 	constructor(id, Images) {
-		this.mike = new Character(Images.Mike);
-		this.mini = new Character(Images.Mini);
+		this.mike = new Character(Images.Mike, hmUI.show_level.ONLY_NORMAL);
+		this.mini = new Character(Images.Mini, hmUI.show_level.ONLY_NORMAL);
 		this.mini.hide();
 		this.mike.hide();
+
+		this.aodMini = new Character(Images.AODMini, hmUI.show_level.ONAL_AOD);
 
 		const deviceInfo = hmSetting.getDeviceInfo();
 		const optionalTypes = [
@@ -77,10 +79,21 @@ export class Selector {
 				this.mini.onResume();
 				break;
 		}
+		this.aodMini.onResume();
 	}
 
 	onPause() {
 		this.mike.onPause();
 		this.mini.onPause();
+
+		const current = this.selectorWidget.getProperty(hmUI.prop.CURRENT_TYPE);
+		switch (current) {
+			case 100001:
+				this.aodMini.onPause();
+				break;
+			case 100002:
+				this.aodMini.onPause();
+				break;
+		}
 	}
 }

@@ -1,12 +1,15 @@
 export class Character {
-	constructor(Images) {
+	constructor(Images, show_level) {
+		show_level = show_level || hmUI.show_level.ONLY_NORMAL;
+
 		this.Images = Images;
+		this.isAOD = show_level === hmUI.show_level.ONAL_AOD;
 
 		this.rightBodyImage = hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
 			src: this.Images.RightBody,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.rightHourTime = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -15,14 +18,14 @@ export class Character {
 			hour_posX: 36,
 			hour_posY: 130,
 			hour_path: this.Images.RightHour,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.rightHeadImage = hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
 			src: this.Images.RightHead,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.rightMinute1Time = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -31,7 +34,7 @@ export class Character {
 			minute_posX: 24,
 			minute_posY: 149,
 			minute_path: this.Images.RightMinute1,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.rightMinute2Time = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -40,14 +43,14 @@ export class Character {
 			minute_posX: 24,
 			minute_posY: 149,
 			minute_path: this.Images.RightMinute2,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.leftBodyImage = hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
 			src: this.Images.LeftBody,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.leftHourTime = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -56,14 +59,14 @@ export class Character {
 			hour_posX: 36,
 			hour_posY: 130,
 			hour_path: this.Images.LeftHour,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.leftHeadImage = hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
 			src: this.Images.LeftHead,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.leftMinute1Time = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -72,7 +75,7 @@ export class Character {
 			minute_posX: 24,
 			minute_posY: 149,
 			minute_path: this.Images.LeftMinute1,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
 
 		this.leftMinute2Time = hmUI.createWidget(hmUI.widget.TIME_POINTER, {
@@ -81,8 +84,12 @@ export class Character {
 			minute_posX: 24,
 			minute_posY: 149,
 			minute_path: this.Images.LeftMinute2,
-			show_level: hmUI.show_level.ONLY_NORMAL
+			show_level
 		});
+
+		if (this.isAOD) {
+			this.timer = timer.createTimer(500, 60000, this.updateCharacter);
+		}
 	}
 
 	hide() {
@@ -100,7 +107,7 @@ export class Character {
 	}
 
 	show() {
-		this.onResume();
+		this.updateCharacter();
 	}
 
 	destroy() {
@@ -127,7 +134,7 @@ export class Character {
 		this.leftMinute2Time = null;
 	}
 
-	onResume() {
+	updateCharacter() {
 		const date = new Date();
 		const m = date.getMinutes();
 		let h = date.getHours();
@@ -173,6 +180,10 @@ export class Character {
 				this.leftMinute2Time.setProperty(hmUI.prop.VISIBLE, true);
 			}
 		}
+	}
+
+	onResume() {
+		this.updateCharacter();
 	}
 
 	onPause() {

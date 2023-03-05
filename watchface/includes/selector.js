@@ -7,7 +7,10 @@ export class Selector {
 		this.mini.hide();
 		this.mike.hide();
 
+		this.aodMike = new Character(Images.AODMike, hmUI.show_level.ONAL_AOD);
 		this.aodMini = new Character(Images.AODMini, hmUI.show_level.ONAL_AOD);
+		this.aodMike.hide();
+		this.aodMini.hide();
 
 		const deviceInfo = hmSetting.getDeviceInfo();
 		const optionalTypes = [
@@ -52,10 +55,14 @@ export class Selector {
 			case 100001:
 				this.mike.show();
 				this.mini.hide();
+				this.aodMike.show();
+				this.aodMini.hide();
 				break;
 			case 100002:
 				this.mike.hide();
 				this.mini.show();
+				this.aodMike.hide();
+				this.aodMini.show();
 				break;
 		}
 
@@ -73,13 +80,14 @@ export class Selector {
 		const current = this.selectorWidget.getProperty(hmUI.prop.CURRENT_TYPE);
 		switch (current) {
 			case 100001:
+				this.aodMike.onResume();
 				this.mike.onResume();
 				break;
 			case 100002:
+				this.aodMini.onResume();
 				this.mini.onResume();
 				break;
 		}
-		this.aodMini.onResume();
 	}
 
 	onPause() {
@@ -89,7 +97,7 @@ export class Selector {
 		const current = this.selectorWidget.getProperty(hmUI.prop.CURRENT_TYPE);
 		switch (current) {
 			case 100001:
-				this.aodMini.onPause();
+				this.aodMike.onPause();
 				break;
 			case 100002:
 				this.aodMini.onPause();

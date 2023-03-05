@@ -7,9 +7,9 @@ export const getImages = (lang) => {
     Selector: {
       Mike: img('select_mike.png'),
       Mini: img('select_mini.png'),
-			Tips: img('tips.png'),
-			Select: img('select.png'),
-			Mask: img('mask.png')
+      Tips: img('tips.png'),
+      Select: img('select.png'),
+      Mask: img('mask.png')
     },
     Mike: {
       LeftBody: img('mike/left_body.png'),
@@ -35,7 +35,19 @@ export const getImages = (lang) => {
       RightMinute1: img('mini/right_minute_1.png'),
       RightMinute2: img('mini/right_minute_2.png')
     },
-		AODMini: {
+    AODMike: {
+      LeftBody: img('aod_mike/left_body.png'),
+      LeftHead: img('aod_mike/left_head.png'),
+      LeftHour: img('aod_mike/left_hour.png'),
+      LeftMinute1: img('aod_mike/left_minute_1.png'),
+      LeftMinute2: img('aod_mike/left_minute_2.png'),
+      RightBody: img('aod_mike/right_body.png'),
+      RightHead: img('aod_mike/right_head.png'),
+      RightHour: img('aod_mike/right_hour.png'),
+      RightMinute1: img('aod_mike/right_minute_1.png'),
+      RightMinute2: img('aod_mike/right_minute_2.png')
+    },
+    AODMini: {
       LeftBody: img('aod_mini/left_body.png'),
       LeftHead: img('aod_mini/left_head.png'),
       LeftHour: img('aod_mini/left_hour.png'),
@@ -46,6 +58,6 @@ export const getImages = (lang) => {
       RightHour: img('aod_mini/right_hour.png'),
       RightMinute1: img('aod_mini/right_minute_1.png'),
       RightMinute2: img('aod_mini/right_minute_2.png')
-		}
+    }
   };
 }

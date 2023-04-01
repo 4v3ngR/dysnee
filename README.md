@@ -1,4 +1,4 @@
-# modular4
+# Dysnee
 The dysnee watchface for GTS 4 mini
 
 ## building
